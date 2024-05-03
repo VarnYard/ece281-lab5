@@ -27,3 +27,20 @@ env:
 If successful then GHDL will quietly exit with a `0` code.
 If any of the `assert` statements fail **with** `severity failure` then GHDL will cease the simulation and exit with non-zero code; this will also cause the workflow to fail.
 Assert statements of other severity levels, such as "error" w
+
+
+
+# Documentation Statement
+
+![image](https://github.com/VarnYard/ece281-lab5/assets/142039672/c242516d-a024-41bd-a401-b3050cddeba9)
+
+![image](https://github.com/VarnYard/ece281-lab5/assets/142039672/55afafaf-2c05-4870-86f4-437a175d2720)
+
+
+-Pictured above is an introspective conversation with ChatOpenAI where some help was provided and even more tears were shed. This led to us adding elements to our component instantiation and declaration. =
+-C3C West and C3C Varnier worked entirely collaboratively on the Lab, pushing to and pulling from the same repository. The textbook was used for the PreLab as well as an EI session with Capt. Yarbrough. 
+
+No other help was provided to the best of C3C West and C3C Varnier's knowledge. 
+
+
+
