@@ -60,7 +60,7 @@ architecture top_basys3_arch of top_basys3 is
             i_A : in std_logic_vector(7 downto 0);
             i_B : in std_logic_vector(7 downto 0);
             i_op : in std_logic_vector(2 downto 0);
-            o_flags : out std_logic_vector(3 downto 0); -- correct?
+            o_flags : out std_logic_vector(2 downto 0); -- correct?
             o_result : out std_logic_vector(7 downto 0)
         );
     end component ALU;
@@ -208,12 +208,31 @@ begin
     port map (
         i_D => sw,
         i_reset => btnU,
+        i_set => w_cycle
+    );
+    
+    regB_inst : reg
+    port map (
+        i_D => sw,
+        i_reset => btnU,
+        i_set => w_cycle
+    );
         
     
 	
 	
 	-- CONCURRENT STATEMENTS ----------------------------
 	
+	-- shut off any anodes? (far left is only used for negative sign when needed)
 	
+	
+	-- LEDs
+	led(15) <= w_flags(0);
+	led(14) <= w_flags(1);
+	led(13) <= w_flags(2);
+	led(3) <= w_cycle(3);
+	led(2) <= w_cycle(2);
+	led(1) <= w_cycle(1);
+	led(0) <= w_cycle(0);
 	
 end top_basys3_arch;
