@@ -55,7 +55,7 @@ entity clock_divider is
 											   -- Effectively, you divide the clk double this 
 											   -- number (e.g., k_DIV := 2 --> clock divider of 4)
 	port ( 	i_clk    : in std_logic;
-			i_reset  : in std_logic;		   -- asynchronous
+			--i_reset  : in std_logic;		   -- asynchronous
 			o_clk    : out std_logic		   -- divided (slow) clock
 	);
 end clock_divider;
@@ -75,19 +75,14 @@ begin
 	-- Clock count and divide Process -------------------
 	--   increment and compare f_count to k_DIV
 	--   rollover and toggle f_clk when count reaches k_DIV
-	countClock_proc : process(i_clk, i_reset)
+	countClock_proc : process(i_clk)
 	begin
-		if i_reset = '1' then
-			f_count <= 0;
-			f_clk	<= '0';
-		else
-			if rising_edge(i_clk) then			
-				if f_count = k_DIV - 1 then
-					f_count <= 0;
-					f_clk <= not f_clk;
-				else
-					f_count <= f_count + 1;
-				end if;
+		if rising_edge(i_clk) then			
+			if f_count = k_DIV - 1 then
+				f_count <= 0;
+				f_clk <= not f_clk;
+			else
+				f_count <= f_count + 1;
 			end if;
 		end if;
 	end process countClock_proc;

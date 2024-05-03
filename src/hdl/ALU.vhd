@@ -72,39 +72,20 @@ begin
                 end if;
                 w_flags(2) <= '0'; -- Clear overflow flag
                 
-            when "001" => 
-                w_result <= std_logic_vector(unsigned(i_A) - unsigned(i_B)); 
-                if unsigned(i_A) >= unsigned(i_B) then
-                    w_flags(1) <= '0'; -- Clear carry out flag
-                else
-                    w_flags(1) <= '1'; -- Set carry out flag if borrow occurs
-                end if;
-                if w_result = "00000000" then
-                    w_flags(0) <= '1'; -- Set zero flag if result is zero
-                else
-                    w_flags(0) <= '0';
-                end if;
-                w_flags(2) <= '0'; -- Clear overflow flag
-               
-            when "010" =>   
-                w_result <= i_A and i_B; 
-                w_flags <= "000"; 
-               
-            when "011" =>   
-                w_result <= i_A or i_B; 
-                w_flags <= "000"; 
-               
-            when "100" =>   
-                w_result <= std_logic_vector(shift_left(unsigned(i_A),to_integer(unsigned(i_B))));        
-                w_flags <= "000"; 
-               
-            when "101" =>   
-                w_result <= std_logic_vector(shift_right(unsigned(i_A),to_integer(unsigned(i_B))));
-                w_flags <= "000"; 
-               
-            when others =>  
-                w_result <= (others => '0'); 
-                w_flags <= "000"; 
+            when others => -- add other cases for different operations later
+                w_result <= std_logic_vector(unsigned(i_A) + unsigned(i_B));   
+                            if (unsigned(i_A) + unsigned(i_B)) > 255 then
+                                w_flags(1) <= '1'; -- Set carry out flag if overflow occurs
+                            else
+                                w_flags(1) <= '0';
+                            end if;
+                            if w_result = "00000000" then
+                                w_flags(0) <= '1'; -- Set zero flag if result is zero
+                            else
+                                w_flags(0) <= '0';
+                            end if;
+                            w_flags(2) <= '0'; -- Clear overflow flag
+             
         end case; 
     end process; 
        

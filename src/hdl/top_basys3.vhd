@@ -46,14 +46,14 @@ architecture top_basys3_arch of top_basys3 is
   
 	-- declare components and signals
 	
-    component controller_fsm is
+    component controller_fsm2 is
         port (
             i_reset : in std_logic;
             i_adv : in std_logic;
             o_cycle : out std_logic_vector(3 downto 0)
             
         );
-    end component controller_fsm;
+    end component controller_fsm2;
     
     component ALU is
         port (
@@ -138,6 +138,15 @@ architecture top_basys3_arch of top_basys3 is
         );
     end component reg;
     
+    component regB is
+        port (
+            i_reset : in std_logic;
+            i_set : in std_logic_vector(3 downto 0); -- need for cycle input at top?
+            i_D : in std_logic_vector(7 downto 0);
+            o_Q : out std_logic_vector(7 downto 0)
+        );
+        end component regB;
+    
     -- signals
     signal w_cycle : std_logic_vector(3 downto 0);
     signal w_regA : std_logic_vector(7 downto 0);
@@ -154,7 +163,7 @@ architecture top_basys3_arch of top_basys3 is
   
 begin
 	-- PORT MAPS ----------------------------------------
-    controller_fsm_inst : controller_fsm
+    controller_fsm_inst : controller_fsm2
     port map (
         i_reset => btnU,
         i_adv => btnC,
@@ -211,7 +220,7 @@ begin
         i_set => w_cycle
     );
     
-    regB_inst : reg
+    regB_inst : regB
     port map (
         i_D => sw,
         i_reset => btnU,
