@@ -173,7 +173,7 @@ begin
     ALU_inst : ALU
     port map (
         i_A => w_regA,
-        i_B => w_result,
+        i_B => w_regB, -- w_result
         i_op(0) => sw(0),
         i_op(1) => sw(1),
         i_op(2) => sw(2),
@@ -208,6 +208,7 @@ begin
     );
     
     clk_div_inst : clock_divider
+    generic map (k_DIV => 208333) -- k_DIV value from C3C Payton Nunn
     port map (
         i_clk => clk,
         o_clk => w_clk
@@ -217,21 +218,26 @@ begin
     port map (
         i_D => sw,
         i_reset => btnU,
-        i_set => w_cycle
+        i_set => w_cycle,
+        o_Q => w_regA
     );
     
     regB_inst : regB
     port map (
         i_D => sw,
         i_reset => btnU,
-        i_set => w_cycle
+        i_set => w_cycle,
+        o_Q => w_regB
     );
         
     
 	
 	
 	-- CONCURRENT STATEMENTS ----------------------------
-	
+	w_bin <= w_regA when w_cycle = "0010" else
+	         w_regB when w_cycle = "0100" else
+	         w_result when w_cycle = "1000" else
+	         "00000000";
 	-- shut off any anodes? (far left is only used for negative sign when needed)
 	
 	
