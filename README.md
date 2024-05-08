@@ -48,7 +48,7 @@ Assert statements of other severity levels, such as "error" w
 
 -ChatOpenAI was used to assist with the ALU construction and to debug it but I cannot locate the conversation link. If it is subsequently found it will be added into this file. 
 
--C3C West talked to C3C Nunn over the phone for help with distinguishing the operator code in the register file. In addition, C3C Nunn helped us fix an issue we were having in our clock within our Basys3_Master.xdc file and provided assistance with debugging and reading error messages.
+-C3C West talked to C3C Nunn over the phone for help with distinguishing the operator code in the register file. In addition, C3C Nunn helped us fix an issue we were having in our clock within our Basys3_Master.xdc file and provided assistance with debugging and reading error messages. C3C Nunn also helped identify errors in our submitted ALU schematic for our prelab.
 
 -No other help was provided to the best of C3C West and C3C Varnier's knowledge. 
 
